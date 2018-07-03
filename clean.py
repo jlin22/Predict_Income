@@ -37,8 +37,8 @@ test = clean('adult.test.txt', '?')
 merged = pd.concat([train, test])
 merged = oneHot(merged)
 merged = convertOutput(merged)
-test = merged[0:r]
-train = merged[r:]
+train = merged[0:r]
+test = merged[r:]
 train.to_csv('clean_train.txt')
 test.to_csv('clean_test.txt')
 

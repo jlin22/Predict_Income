@@ -5,6 +5,7 @@ import numpy as np
     stochasticGD
     regularized LR
     Validation and Cross Validation
+    print weights function to see which weights had most impact
     '''
 def getData(filename):
     return pd.read_csv(filename, index_col = 0)
@@ -26,7 +27,9 @@ def stochasticGD(X, y):
     pass
 
 def costFunction(X, y, theta):
-    pass
+    m = len(y)
+    print(m)
+    return 1 / m * (np.dot(X, theta) - y) ** 2
     
 def testError(X, y, theta):
     error = 0
@@ -45,6 +48,7 @@ def predict(theta, x):
 '''returns the weights obtained from normal equation'''
 def normalTrain():
     train = getData('clean_train.txt')
+    print(train.shape)
     X, y = createMatrices(train)
     insertBias(X)
     theta = normalEquation(X, y)
