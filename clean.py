@@ -30,13 +30,15 @@ def convertOutput(df):
     df['label'] = df['label'].apply(convert)
     return df
 
+#lets try merging the data frames and then separating
 train = clean('adult.data.txt', '?')
-train = oneHot(train)
-train = convertOutput(train)
+r, c = train.shape
+test = clean('adult.test.txt', '?')
+merged = pd.concat([train, test])
+merged = oneHot(merged)
+merged = convertOutput(merged)
+test = merged[0:r]
+train = merged[r:]
 train.to_csv('clean_train.txt')
-#test = clean('adult.test.txt', '?')
-#oneHot(test)
-#test.to_csv('clean_test.txt')
-
-
+test.to_csv('clean_test.txt')
 
