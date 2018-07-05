@@ -24,6 +24,7 @@ def oneHot(df):
     df = pd.concat([df, y], axis=1)
     return df
 
+'''1 means >=50k and 0 means <50k'''
 def convertOutput(df):
     def convert(x):
         return 1 if '>' in x else 0 

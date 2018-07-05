@@ -1,31 +1,22 @@
 import numpy as np 
 from general import *
 import random
+from sklearn.linear_model import LogisticRegression
 
-
-def sigmoid(z):
-    return 1 / (1 + np.exp(z))
-
-def logisticCost(X, y, theta):
-    h = np.dot(X, theta)
-    return np.sum(y * h + (1 - y) * (1 - h))
-
-def sGD(X, y, theta, alpha):
-    m, c = X.shape
-    theta = np.zeros((c, 1))
-    epsilon = 0.001
-    for i in range(len(theta)):
-        theta[i] = 2 * epsilon * random.uniform(0, 1) - epsilon
-    for i in range(10):
-        cost_prev = logisticCost(X, y, theta)
-        print(X.loc[i].shape)
-        print(y.shape)
-        gradient = 1/m * np.dot(X.T, y - sigmoid(np.dot(X, theta)))
-        theta += alpha * gradient
-        cost_cur = logisticCost(X, y, theta)
-    return theta
-
+train = getData('clean_train.txt')
+X, y = createMatrices(train)
+y = [int(y.loc[i]) for i in range(y.shape[0])]
+lr = LogisticRegression(penalty = 'l2', C = 10 ** 14) 
+lr.fit(X, y)
 test = getData('clean_test.txt')
-X, y = createMatrices(test)
-theta = np.zeros(0)
-theta = sGD(X, y, theta, 0.1)
+pred_x, corr_y = createMatrices(test)
+pred_y = lr.predict(pred_x)
+error = 0
+for i in range(pred_y.shape[0]):
+    if pred_y[i] != int(corr_y.loc[i]):
+        error += 1
+print(error/pred_y.shape[0])
+
+
+
+
