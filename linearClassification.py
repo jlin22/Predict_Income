@@ -17,6 +17,10 @@ def normalTrain():
     theta = normalEquation(X, y)
     return theta
 
+def regNormalTrain(lambda):
+    train = getData('clean_train.txt')
+    X, y = createMatrices(train)
+
 def testError(X, y, theta):
     error = 0
     predictions = np.dot(X, theta)

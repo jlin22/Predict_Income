@@ -26,12 +26,12 @@ def oneHot(df):
 
 def convertOutput(df):
     def convert(x):
-        return 1 if '>' in x else -1
+        return 1 if '>' in x else 0 
     df['label'] = df['label'].apply(convert)
     return df
 
-#lets try merging the data frames and then separating
-train = clean('adult.data.txt', '?')
+#cleans train and test
+train = clean('adult.train.txt', '?')
 r, c = train.shape
 test = clean('adult.test.txt', '?')
 merged = pd.concat([train, test])
