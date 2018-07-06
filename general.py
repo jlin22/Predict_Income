@@ -26,4 +26,10 @@ def createMatrices(df):
     insertBias(X)
     return [X, y]
     
+def error(pred, test):
+    error = 0
+    for i in range(pred.shape[0]):
+        if pred[i] != int(test.loc[i]):
+            error += 1
+    return error / pred.shape[0]
 
