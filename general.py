@@ -33,3 +33,9 @@ def error(pred, test):
             error += 1
     return error / pred.shape[0]
 
+def validation(fn):
+    data = getData(fn)
+    data.sample(frac=1)
+    data = data.reset_index(drop=True)
+    validation = data[:int(data.shape[0] * 0.3)]
+    return validation, data
