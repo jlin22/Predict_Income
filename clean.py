@@ -32,14 +32,28 @@ def convertOutput(df):
     return df
 
 #cleans train and test
-train = clean('adult.train.txt', '?')
-r, c = train.shape
-test = clean('adult.test.txt', '?')
-merged = pd.concat([train, test])
-merged = oneHot(merged)
-merged = convertOutput(merged)
-train = merged[0:r]
-test = merged[r:]
-train.to_csv('clean_train.txt')
-test.to_csv('clean_test.txt')
+def continuousClean():
+    train = clean('adult.train.txt', '?')
+    r, c = train.shape
+    test = clean('adult.test.txt', '?')
+    merged = pd.concat([train, test])
+    merged = oneHot(merged)
+    merged = convertOutput(merged)
+    train = merged[0:r]
+    test = merged[r:]
+    train.to_csv('clean_train.txt')
+    test.to_csv('clean_test.txt')
+
+def normalClean():
+    train = clean('adult.train.txt', '?')
+    r, c = train.shape
+    test = clean('adult.test.txt', '?')
+    merged = pd.concat([train, test])
+    merged = convertOutput(merged)
+    train = merged[0:r]
+    test = merged[r:]
+    train.to_csv('normal_train.txt')
+    test.to_csv('normal_test.txt')
+
+normalClean()
 
